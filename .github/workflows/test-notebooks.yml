@@ -33,8 +33,13 @@ jobs:
       - name: Flake all notebooks
         run: |
           # Loop through all notebooks and check for PEP-8
-          for i in *.ipynb; do flake8_nb $i;
+          for i in *.ipynb; 
+          do flake8_nb \
+            --notebook-cell-format '{nb_path}:cell#{total_cell_count}' \
+            --ignore=F821 \
+            $i;
           done
+        continue-on-error: true
       - name: Run all notebooks
         run: |
           # Loop through all notebooks and run them using papermill
