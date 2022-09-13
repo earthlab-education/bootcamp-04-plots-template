@@ -30,13 +30,13 @@ jobs:
           auto-activate-base: false
           environment-file: environment.yml
           activate-environment: ea-python-04-test
-      - name: Run all notebooks
-        run: |
-          # Loop through all notebooks and run them using papermill
-          for i in *.ipynb; do papermill $i testing.ipynb;
-          done
       - name: Flake all notebooks
         run: |
           # Loop through all notebooks and check for PEP-8
           for i in *.ipynb; do flake8_nb $i;
+          done
+      - name: Run all notebooks
+        run: |
+          # Loop through all notebooks and run them using papermill
+          for i in *.ipynb; do papermill $i testing.ipynb;
           done
